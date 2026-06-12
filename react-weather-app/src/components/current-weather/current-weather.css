@@ -1,23 +1,17 @@
-/* current-weather.css — neo-brutalist */
+/* current-weather.css — clean WhatsApp-style */
 
 .weather-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 
 .weather {
-  border: var(--border);
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 22px;
-  background: var(--card);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
-}
-
-.weather:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: var(--shadow-lg);
 }
 
 .top {
@@ -28,14 +22,14 @@
 }
 
 .weather-icon {
-  font-size: 64px;
+  font-size: 52px;
   line-height: 1;
 }
 
 .city {
-  font-family: "Archivo Black", sans-serif;
-  font-size: 26px;
-  letter-spacing: -0.5px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
   margin: 0;
   overflow-wrap: anywhere;
 }
@@ -45,48 +39,44 @@
   align-items: baseline;
   gap: 8px;
   margin: 10px 0 0;
-  background: var(--pastel-lav);
-  border: var(--border);
-  border-radius: 10px;
-  box-shadow: var(--shadow-sm);
-  padding: 4px 12px;
+  background: var(--card-2);
+  border-radius: 999px;
+  padding: 5px 14px;
 }
 
 .local-clock {
-  font-family: "Archivo Black", sans-serif;
-  font-size: 20px;
-  letter-spacing: -0.5px;
+  font-size: 16px;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
 .local-date {
-  font-weight: 700;
-  font-size: 12px;
+  font-weight: 600;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
+  color: var(--text-2);
 }
 
 .weather-description {
   display: inline-block;
   margin-top: 10px;
-  font-weight: 700;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 13px;
   text-transform: capitalize;
-  background: var(--pastel-mint);
-  border: var(--border);
-  border-radius: 999px;
-  padding: 3px 12px;
+  color: var(--text-2);
 }
 
 .bottom {
-  margin-top: 18px;
+  margin-top: 14px;
   height: auto;
 }
 
 .temperature {
-  font-family: "Archivo Black", sans-serif;
-  font-size: 64px;
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -1px;
   line-height: 1;
   margin: 0 0 16px;
 }
@@ -101,87 +91,64 @@
 .parameter-row {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  background: var(--pastel-sky);
-  border: var(--border);
-  border-radius: 10px;
-  padding: 10px 12px;
+  gap: 3px;
+  background: var(--card-2);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
 }
 
 .parameter-label {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
+  color: var(--text-2);
 }
 
 .parameter-value {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 /* ===== AQI card ===== */
 .aqi-container {
-  border: var(--border);
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 22px;
-  background: var(--pastel-yellow);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
-}
-
-.aqi-container:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: var(--shadow-lg);
+  padding: 20px 22px;
 }
 
 .aqi-label {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 0 0 6px;
+  letter-spacing: 0.6px;
+  color: var(--text-2);
+  margin: 0 0 4px;
 }
 
 .aqi-value {
-  font-family: "Archivo Black", sans-serif;
-  font-size: 56px;
-  line-height: 1;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.05;
 }
 
 .aqi-category {
   display: inline-block;
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   font-weight: 700;
-  font-size: 14px;
-  background: var(--card);
-  border: var(--border);
+  font-size: 13px;
   border-radius: 999px;
   padding: 4px 14px;
+  color: #fff;
 }
 
-/* ===== Bhopal ML graph ===== */
-.graph-container {
-  border: var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 18px;
-  background: var(--card);
-  font-weight: 600;
-}
-
-.graph-container img {
-  max-width: 100%;
-  height: auto;
-  border: var(--border);
-  border-radius: 10px;
-}
-
-@media (max-width: 480px) {
+@media (max-width: 420px) {
   .details {
     grid-template-columns: 1fr;
   }
   .temperature {
-    font-size: 52px;
+    font-size: 48px;
   }
 }

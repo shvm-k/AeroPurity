@@ -1,66 +1,57 @@
-/* search.css — neo-brutalist */
+/* search.css — clean WhatsApp-style */
 
 .search-container {
-  margin: 8px 0 20px;
-  border-radius: 12px;
-  border: var(--border);
+  margin: 6px 0 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
   box-shadow: var(--shadow);
-  padding: 6px;
+  padding: 4px 10px;
   background: var(--card);
 }
 
 /* react-select internals */
-.search-container .css-13cymwt-control,
-.search-container .css-t3ipsp-control,
 .search-container [class*="-control"] {
   border: none !important;
   box-shadow: none !important;
   background: transparent !important;
-  min-height: 48px;
-  font-weight: 600;
+  min-height: 46px;
+  font-weight: 500;
 }
 
 .search-container [class*="-placeholder"] {
-  color: #6b6680;
-  font-weight: 600;
+  color: var(--text-2);
+  font-weight: 500;
 }
 
 .search-container [class*="-singleValue"],
-.search-container [class*="-input"] {
-  font-weight: 700;
-  color: var(--ink);
+.search-container [class*="-input"],
+.search-container input {
+  color: var(--text) !important;
+  font-weight: 600;
 }
 
 .search-container [class*="-menu"] {
-  border: var(--border);
-  border-radius: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow);
   overflow: hidden;
-  font-weight: 600;
   margin-top: 8px;
   background: var(--card);
+  color: var(--text);
 }
 
 .search-container [class*="-option"] {
   padding: 12px 16px;
   cursor: pointer;
+  font-weight: 500;
+  background: transparent !important;
+  color: var(--text) !important;
 }
 
-/* Message container */
-.message-container {
-  border-radius: 12px;
-  border: var(--border);
-  box-shadow: var(--shadow-sm);
-  padding: 14px 18px;
-  background: var(--pastel-mint);
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 16px;
+.search-container [class*="-option"]:hover {
+  background: var(--card-2) !important;
 }
 
-.message-container a {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  font-weight: 700;
+.search-container [class*="-indicatorSeparator"] {
+  display: none;
 }

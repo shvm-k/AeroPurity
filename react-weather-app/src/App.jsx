@@ -4,7 +4,7 @@ import Search from "./components/search/search";
 import CurrentWeather from "./components/current-weather/current-weather";
 import Forecast from "./components/forecast/forecast";
 import { fetchForecast, fetchAirQuality } from "./api";
-import { getAQIGradient } from "./utils/aqiUtils";
+import { getAQIBackground } from "./utils/aqiUtils";
 import "./App.css";
 
 const SUGGESTED_CITIES = [
@@ -52,10 +52,16 @@ function App() {
   const hasData = Boolean(currentWeather);
   const isDay = currentWeather ? currentWeather.isDay : true;
 
+  // Keep the page/body background in sync with the theme so the scrollbar
+  // gutter and mobile overscroll never reveal a light strip at night.
+  useEffect(() => {
+    document.body.classList.toggle("theme-night", !isDay);
+  }, [isDay]);
+
   return (
     <div
       className={`App${isDay ? "" : " night"}`}
-      style={{ background: getAQIGradient(aqi, isDay) }}
+      style={{ background: getAQIBackground(aqi, isDay) }}
     >
       <header className="app-header">
         <div className="brand">

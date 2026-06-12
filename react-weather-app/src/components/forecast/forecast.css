@@ -1,89 +1,97 @@
-/* forecast.css — neo-brutalist */
+/* forecast.css — clean WhatsApp-style */
 
 .title {
-  display: inline-block;
-  font-family: "Archivo Black", sans-serif;
-  font-size: 20px;
-  margin-bottom: 16px;
-  background: var(--pastel-pink);
-  border: var(--border);
-  border-radius: 10px;
-  box-shadow: var(--shadow-sm);
-  padding: 6px 14px;
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  margin: 4px 2px 12px;
+  color: var(--text);
+}
+
+/* The accordion items live inside one rounded card with row dividers. */
+.title + .accordion,
+.title + div {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.accordion__item + .accordion__item {
+  border-top: 1px solid var(--line);
 }
 
 .daily-item {
-  background: var(--card);
-  border: var(--border);
-  border-radius: 12px;
-  box-shadow: var(--shadow-sm);
-  margin: 12px 0;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
-  padding: 12px 16px;
-  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s;
+  padding: 14px 18px;
+  transition: background 0.15s;
 }
 
 .daily-item:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: var(--shadow);
-  background: var(--pastel-lav);
+  background: var(--card-2);
 }
 
 .icon-small {
-  font-size: 30px;
+  font-size: 26px;
   line-height: 1;
-  width: 38px;
+  width: 32px;
   text-align: center;
 }
 
 .day {
-  flex: 1 1;
+  flex: 1 1 auto;
   font-weight: 700;
+  font-size: 15px;
 }
 
 .description {
   text-align: right;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 13px;
   text-transform: capitalize;
-  color: #3a3550;
+  color: var(--text-2);
 }
 
 .separator {
-  color: var(--ink);
-  font-weight: 700;
-  margin: 0 6px;
+  color: var(--text-2);
+  margin: 0 8px;
 }
 
 .min-max {
   font-weight: 700;
+  font-size: 15px;
   white-space: nowrap;
 }
 
 .daily-details-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  grid-gap: 10px;
-  margin: 4px 0 14px;
-  padding: 14px;
-  background: var(--pastel-sky);
-  border: var(--border);
-  border-radius: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px 18px;
+  margin: 0 18px 16px;
+  padding: 14px 16px;
+  background: var(--card-2);
+  border-radius: var(--radius-sm);
 }
 
 .daily-details-grid-item {
   display: flex;
   justify-content: space-between;
-  font-weight: 600;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
 }
 
 .daily-details-grid-item label:first-child {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .daily-details-grid-item label:last-child {
-  margin-left: 10px;
+  color: var(--text);
+  font-weight: 600;
 }

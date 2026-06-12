@@ -78,7 +78,7 @@ const CurrentWeather = ({ data, aqi }) => {
         <div className="aqi-value" style={{ color: aqiColor }}>
           {aqi ?? "—"}
         </div>
-        <p className="aqi-category" style={{ color: aqiColor }}>{aqiLabel}</p>
+        <p className="aqi-category" style={{ backgroundColor: aqiColor }}>{aqiLabel}</p>
       </div>
     </div>
   );

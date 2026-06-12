@@ -1,142 +1,142 @@
-/* ===== AeroPurity — Neo-Brutalist redesign ===== */
+/* ===== AeroPurity — clean WhatsApp-style UI ===== */
 
 :root {
-  --ink: #14121f;
-  --border: 3px solid var(--ink);
-  --shadow: 6px 6px 0 var(--ink);
-  --shadow-sm: 4px 4px 0 var(--ink);
-  --shadow-lg: 9px 9px 0 var(--ink);
-  --radius: 14px;
+  /* light / day theme */
+  --card: #ffffff;
+  --card-2: #f0f2f5;
+  --text: #111b21;
+  --text-2: #667781;
+  --line: rgba(17, 27, 33, 0.08);
+  --shadow: 0 1px 2px rgba(11, 20, 26, 0.06), 0 6px 20px rgba(11, 20, 26, 0.07);
+  --shadow-sm: 0 1px 2px rgba(11, 20, 26, 0.08);
+  --radius: 16px;
+  --radius-sm: 12px;
+  --accent: #1da851;
+  --accent-strong: #008a45;
+}
 
-  --pastel-lav: #c8b6ff;
-  --pastel-mint: #a8f0d1;
-  --pastel-peach: #ffc2a1;
-  --pastel-yellow: #ffe066;
-  --pastel-sky: #a9d6ff;
-  --pastel-pink: #ffb3d9;
-  --card: #fffdf6;
+.App.night {
+  --card: #1f2c34;
+  --card-2: #2a3942;
+  --text: #e9edef;
+  --text-2: #8696a0;
+  --line: rgba(233, 237, 239, 0.1);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.28);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --accent: #00a884;
+  --accent-strong: #25d366;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 .App {
   min-height: 100vh;
-  transition: background 0.7s ease;
-  font-family: "Space Grotesk", system-ui, sans-serif;
-  color: var(--ink);
-  padding-bottom: 90px;
-}
-
-/* Nighttime: dark background, so soften the hard black shadows into
-   translucent ones that still pop the cream cards off a dark gradient. */
-.App.night {
-  --shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
-  --shadow-sm: 4px 4px 0 rgba(0, 0, 0, 0.5);
-  --shadow-lg: 9px 9px 0 rgba(0, 0, 0, 0.5);
-}
-
-.brand-tagline.daynight {
-  background: var(--pastel-sky);
+  width: 100%;
+  overflow-x: hidden;
+  transition: background 0.6s ease, color 0.3s ease;
+  font-family: "Space Grotesk", system-ui, -apple-system, Segoe UI, sans-serif;
+  color: var(--text);
+  padding-bottom: 96px;
 }
 
 /* ===== Header ===== */
 .app-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 8px 18px;
-  max-width: 1080px;
+  gap: 10px 18px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 28px 24px 8px;
+  padding: 24px 20px 6px;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: var(--pastel-yellow);
-  border: var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  padding: 8px 16px;
+  gap: 8px;
 }
 
 .brand-mark {
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1;
 }
 
 .brand-name {
-  font-family: "Archivo Black", "Space Grotesk", sans-serif;
   font-size: 22px;
-  letter-spacing: -0.5px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--accent);
 }
 
 .brand-tagline {
   margin: 0;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.brand-tagline.daynight {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: var(--card);
-  border: var(--border);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 6px 14px;
   box-shadow: var(--shadow-sm);
+  color: var(--text);
 }
 
 /* ===== Layout ===== */
 .container {
-  max-width: 1080px;
+  max-width: 760px;
+  width: 100%;
   margin: 0 auto;
-  padding: 16px 24px 24px;
-  position: relative;
+  padding: 12px 20px 24px;
 }
 
 .dashboard {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 8px;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin-top: 6px;
 }
 
-/* Let grid columns shrink below their content's min-size, otherwise a
-   nowrap forecast row / long city name blows the track past the viewport
-   and the cards jut out to the right. */
 .dashboard-col {
   min-width: 0;
-}
-
-@media (max-width: 820px) {
-  .dashboard {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ===== Hero (empty state) ===== */
 .hero {
   background: var(--card);
-  border: var(--border);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
-  padding: 36px 28px;
-  margin-top: 8px;
+  box-shadow: var(--shadow);
+  padding: 40px 28px;
+  margin-top: 6px;
   text-align: center;
 }
 
 .hero-title {
-  font-family: "Archivo Black", sans-serif;
-  font-size: clamp(32px, 6vw, 52px);
+  font-size: clamp(28px, 6vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
   margin: 0 0 10px;
-  letter-spacing: -1px;
 }
 
 .hero-sub {
-  font-size: 16px;
-  font-weight: 500;
-  color: #3a3550;
-  max-width: 46ch;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-2);
+  max-width: 44ch;
   margin: 0 auto;
 }
 
@@ -147,40 +147,40 @@
 
 .suggestions-label {
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.6px;
+  color: var(--text-2);
   margin-bottom: 12px;
 }
 
 .suggestions-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   justify-content: center;
 }
 
 .suggestion-chip {
   font-family: inherit;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14px;
-  background: var(--pastel-sky);
-  border: var(--border);
+  color: var(--text);
+  background: var(--card-2);
+  border: 1px solid var(--line);
   border-radius: 999px;
-  box-shadow: var(--shadow-sm);
-  padding: 8px 18px;
+  padding: 8px 16px;
   cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
 }
-.suggestion-chip:nth-child(2n) { background: var(--pastel-mint); }
-.suggestion-chip:nth-child(3n) { background: var(--pastel-pink); }
+
 .suggestion-chip:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 var(--ink);
+  border-color: var(--accent);
+  color: var(--accent-strong);
 }
+
 .suggestion-chip:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--ink);
+  transform: scale(0.97);
 }
 
 /* ===== Footer ===== */
@@ -189,25 +189,25 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background: var(--pastel-lav);
-  border-top: var(--border);
-  padding: 12px 24px;
+  background: var(--card);
+  border-top: 1px solid var(--line);
+  padding: 14px 20px;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 16px;
+  gap: 4px 16px;
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
-  font-weight: 600;
+  color: var(--text-2);
   z-index: 999;
 }
 
 .app-footer a {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 2px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
 }
+
 .app-footer a:hover {
-  background: var(--pastel-yellow);
+  text-decoration: underline;
 }

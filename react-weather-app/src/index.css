@@ -1,10 +1,15 @@
 /* index.css */
 body {
   margin: 0;
-  font-family: "Space Grotesk", system-ui, Arial, sans-serif;
+  font-family: "Space Grotesk", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #c8b6ff;
+  background-color: #f4efe4;
+  transition: background-color 0.6s ease;
+}
+
+body.theme-night {
+  background-color: #0b141a;
 }
 
 code {
