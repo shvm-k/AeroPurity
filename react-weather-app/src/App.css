@@ -101,6 +101,13 @@
   margin-top: 8px;
 }
 
+/* Let grid columns shrink below their content's min-size, otherwise a
+   nowrap forecast row / long city name blows the track past the viewport
+   and the cards jut out to the right. */
+.dashboard-col {
+  min-width: 0;
+}
+
 @media (max-width: 820px) {
   .dashboard {
     grid-template-columns: 1fr;

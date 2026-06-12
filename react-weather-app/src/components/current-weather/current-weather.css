@@ -37,6 +37,7 @@
   font-size: 26px;
   letter-spacing: -0.5px;
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .local-time {
@@ -56,6 +57,7 @@
   font-size: 20px;
   letter-spacing: -0.5px;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .local-date {
