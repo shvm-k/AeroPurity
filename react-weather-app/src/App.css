@@ -37,6 +37,7 @@ body {
 }
 
 .App {
+  position: relative;
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
@@ -44,6 +45,53 @@ body {
   font-family: "Space Grotesk", system-ui, -apple-system, Segoe UI, sans-serif;
   color: var(--text);
   padding-bottom: 96px;
+}
+
+/* Night sky: a moon + scattered stars behind the cards. */
+.App.night::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-image:
+    /* moon glow + disc, top-right */
+    radial-gradient(circle at 87% 12%, rgba(255, 247, 214, 0.16) 0%, transparent 26%),
+    radial-gradient(circle at 87% 12%, #fdf3c7 0 7px, rgba(253, 243, 199, 0) 8px),
+    /* bright stars */
+    radial-gradient(2.4px 2.4px at 18% 16%, #ffffff, transparent),
+    radial-gradient(2.2px 2.2px at 64% 9%, #ffffff, transparent),
+    radial-gradient(2.6px 2.6px at 41% 30%, #eaf2ff, transparent),
+    radial-gradient(2.2px 2.2px at 78% 40%, #ffffff, transparent),
+    /* small stars */
+    radial-gradient(1.4px 1.4px at 9% 34%, #cfe0ff, transparent),
+    radial-gradient(1.3px 1.3px at 28% 52%, #ffffff, transparent),
+    radial-gradient(1.4px 1.4px at 52% 18%, #ffffff, transparent),
+    radial-gradient(1.2px 1.2px at 72% 24%, #dfe9ff, transparent),
+    radial-gradient(1.3px 1.3px at 92% 33%, #ffffff, transparent),
+    radial-gradient(1.4px 1.4px at 15% 64%, #ffffff, transparent),
+    radial-gradient(1.2px 1.2px at 35% 76%, #cfe0ff, transparent),
+    radial-gradient(1.3px 1.3px at 58% 62%, #ffffff, transparent),
+    radial-gradient(1.2px 1.2px at 83% 70%, #ffffff, transparent),
+    radial-gradient(1.4px 1.4px at 46% 88%, #dfe9ff, transparent),
+    radial-gradient(1.2px 1.2px at 24% 92%, #ffffff, transparent),
+    radial-gradient(1.3px 1.3px at 68% 90%, #ffffff, transparent),
+    radial-gradient(1.2px 1.2px at 95% 84%, #cfe0ff, transparent),
+    radial-gradient(1.3px 1.3px at 6% 80%, #ffffff, transparent);
+  background-size: cover;
+  animation: twinkle 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.75; }
+  to { opacity: 1; }
+}
+
+.app-header,
+.container {
+  position: relative;
+  z-index: 1;
 }
 
 /* ===== Header ===== */
@@ -58,22 +106,33 @@ body {
   padding: 24px 20px 6px;
 }
 
+/* Neo-brutalist brand badge — a deliberate "sticker" against the clean UI:
+   light pastel fill with a faint dotted texture, black outline, hard shadow. */
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
+  padding: 8px 15px 8px 13px;
+  border: 2.5px solid #14121f;
+  border-radius: 13px;
+  box-shadow: 4px 4px 0 #14121f;
+  background-color: #eaf3c2;
+  background-image: radial-gradient(rgba(20, 18, 31, 0.07) 1px, transparent 1.4px);
+  background-size: 7px 7px;
 }
 
 .brand-mark {
-  font-size: 20px;
-  line-height: 1;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  filter: drop-shadow(1px 1px 0 rgba(20, 18, 31, 0.25));
 }
 
 .brand-name {
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.3px;
-  color: var(--accent);
+  color: #1b7a3d;
 }
 
 .brand-tagline {

@@ -65,7 +65,16 @@ function App() {
     >
       <header className="app-header">
         <div className="brand">
-          <span className="brand-mark" aria-hidden="true">☁</span>
+          <svg className="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
+              fill="#fffdf6"
+              stroke="#14121f"
+              strokeWidth="1.7"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+          </svg>
           <span className="brand-name">AeroPurity</span>
         </div>
         {hasData ? (

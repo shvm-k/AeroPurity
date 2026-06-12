@@ -13,9 +13,11 @@ const DAY_BASE = '#f4efe4';
 const NIGHT_BASE = '#0b141a';
 
 export function getAQIBackground(aqi, isDay = true) {
-  const base = isDay ? DAY_BASE : NIGHT_BASE;
-  if (aqi == null) return base;
+  // Night uses a starfield (drawn in CSS via .App.night::before), so keep
+  // the element background a flat dark base here.
+  if (!isDay) return NIGHT_BASE;
+  if (aqi == null) return DAY_BASE;
   const { color } = getAQIInfo(aqi);
-  const alpha = isDay ? '24' : '38'; // ~14% / ~22% opacity (8-digit hex)
-  return `radial-gradient(135% 95% at 100% 0%, ${color}${alpha} 0%, ${base} 58%)`;
+  // Subtle wash of the AQI color in the top-right corner (daytime only).
+  return `radial-gradient(135% 95% at 100% 0%, ${color}24 0%, ${DAY_BASE} 58%)`;
 }
