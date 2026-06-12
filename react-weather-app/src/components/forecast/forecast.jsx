@@ -10,15 +10,43 @@ import "./forecast.css";
 
 const WEEK_DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+function groupForecastByDay(forecastList) {
+  const days = {};
+  const order = [];
+  forecastList.forEach((item) => {
+    const dateKey = new Date(item.dt * 1000).toLocaleDateString('en-IN');
+    if (!days[dateKey]) {
+      days[dateKey] = { items: [], temps: [] };
+      order.push(dateKey);
+    }
+    days[dateKey].items.push(item);
+    days[dateKey].temps.push(item.main.temp);
+  });
+
+  return order.map((dateKey) => {
+    const { items, temps } = days[dateKey];
+    const representative = items[Math.floor(items.length / 2)];
+    return {
+      ...representative,
+      main: {
+        ...representative.main,
+        temp_max: Math.round(Math.max(...temps)),
+        temp_min: Math.round(Math.min(...temps)),
+      },
+    };
+  });
+}
+
 const Forecast = ({ data }) => {
   const dayInAWeek = new Date().getDay();
   const forecastDays = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(WEEK_DAYS.slice(0, dayInAWeek));
-  
+  const dailyForecast = groupForecastByDay(data.list).slice(0, 7);
+
   return (
     <>
       <label className="title">Predicted</label>
       <Accordion allowZeroExpanded>
-        {data.list.splice(0, 7).map((item, idx) => (
+        {dailyForecast.map((item, idx) => (
           <AccordionItem key={idx}>
             <AccordionItemHeading>
               <AccordionItemButton>
@@ -26,7 +54,8 @@ const Forecast = ({ data }) => {
                   <img src={`icons/${item.weather[0].icon}.png`} className="icon-small" alt="weather" />
                   <label className="day">{forecastDays[idx]}</label>
                   <label className="description">{item.weather[0].description}</label>
-                  <label className="min-max">{Math.round(item.main.temp_max)}°C /{Math.round(item.main.temp_min)}°C</label>
+                  <span className="separator">·</span>
+                  <label className="min-max">{item.main.temp_max}°C / {item.main.temp_min}°C</label>
                 </div>
               </AccordionItemButton>
             </AccordionItemHeading>

@@ -1,8 +1,10 @@
 import React from "react";
 import "./current-weather.css";
+import { getAQIInfo } from "../../utils/aqiUtils";
 
 const CurrentWeather = ({ data, aqi }) => {
   const isBhopalIndia = data.city === "Bhopal, IN"; // Check if the searched location is Bhopal, IN
+  const { label: aqiLabel, color: aqiColor } = getAQIInfo(aqi);
 
   return (
     <div className="weather-container">
@@ -44,15 +46,17 @@ const CurrentWeather = ({ data, aqi }) => {
       </div>
 
       {isBhopalIndia && (
-  <div className="graph-container">
-    <img src="api-graph.jpeg" alt="Graph" style={{ width: '600px', height: 'auto', align: 'right'}}/> Historical,Predicted AQI (from ML model)
-  </div>
-)}
+        <div className="graph-container">
+          <img src="api-graph.jpeg" alt="Historical and predicted AQI graph" />
+          <p>Historical &amp; predicted AQI (from ML model)</p>
+        </div>
+      )}
 
 
       <div className="aqi-container">
         <p className="aqi-label">Live Air Quality Index (AQI)</p>
-        <div className="aqi-value">{aqi}</div>
+        <div className="aqi-value" style={{ color: aqiColor }}>{aqi}</div>
+        <p className="aqi-category" style={{ color: aqiColor }}>{aqiLabel}</p>
       </div>
     </div>
   );

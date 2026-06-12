@@ -1,69 +1,87 @@
-/* forecast.css */
+/* forecast.css — neo-brutalist */
 
 .title {
-    font-size: 23px;
-    font-weight: 700;
-    margin-bottom: 20px; /* Add margin bottom to create a gap */
-    color: #333;
+  display: inline-block;
+  font-family: "Archivo Black", sans-serif;
+  font-size: 20px;
+  margin-bottom: 16px;
+  background: var(--pastel-pink);
+  border: var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  padding: 6px 14px;
 }
 
 .daily-item {
-    background-color: #f5f5f5;
-    border-radius: 15px;
-    margin: 10px 0;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 10px 20px;
-    transition: background-color 0.3s ease;
+  background: var(--card);
+  border: var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 12px 16px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s;
 }
 
 .daily-item:hover {
-    background-color: #e0e0e0;
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow);
+  background: var(--pastel-lav);
 }
 
 .icon-small {
-    width: 40px;
-    height: 40px;
-    margin-right: 15px;
+  width: 42px;
+  height: 42px;
 }
 
 .day {
-    flex: 1 1;
-    font-weight: 600;
-    color: #333;
+  flex: 1 1;
+  font-weight: 700;
 }
 
 .description {
-    flex: 1 1;
-    text-align: right;
-    color: #666;
+  text-align: right;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: capitalize;
+  color: #3a3550;
+}
+
+.separator {
+  color: var(--ink);
+  font-weight: 700;
+  margin: 0 6px;
 }
 
 .min-max {
-    color: #818181;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .daily-details-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    grid-gap: 10px;
-    margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 10px;
+  margin: 4px 0 14px;
+  padding: 14px;
+  background: var(--pastel-sky);
+  border: var(--border);
+  border-radius: 12px;
 }
 
 .daily-details-grid-item {
-    display: flex;
-    justify-content: space-between;
-}
-
-.daily-details-grid-item label {
-    color: #666;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
 }
 
 .daily-details-grid-item label:first-child {
-    font-weight: bold;
+  font-weight: 700;
 }
 
 .daily-details-grid-item label:last-child {
-    margin-left: 10px;
+  margin-left: 10px;
 }
