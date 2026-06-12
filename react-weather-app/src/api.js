@@ -13,12 +13,12 @@ const WMO = {
   3:  { description: "Overcast",         emoji: "☁️" },
   45: { description: "Fog",              emoji: "🌫️" },
   48: { description: "Rime fog",         emoji: "🌫️" },
-  51: { description: "Light drizzle",    emoji: "🌦️" },
-  53: { description: "Drizzle",          emoji: "🌦️" },
+  51: { description: "Light drizzle",    emoji: "🌦️", night: "🌧️" },
+  53: { description: "Drizzle",          emoji: "🌦️", night: "🌧️" },
   55: { description: "Dense drizzle",    emoji: "🌧️" },
   56: { description: "Freezing drizzle", emoji: "🌧️" },
   57: { description: "Freezing drizzle", emoji: "🌧️" },
-  61: { description: "Light rain",       emoji: "🌧️" },
+  61: { description: "Light rain",       emoji: "🌦️", night: "🌧️" },
   63: { description: "Rain",             emoji: "🌧️" },
   65: { description: "Heavy rain",       emoji: "🌧️" },
   66: { description: "Freezing rain",    emoji: "🌧️" },
@@ -27,7 +27,7 @@ const WMO = {
   73: { description: "Snow",             emoji: "🌨️" },
   75: { description: "Heavy snow",       emoji: "❄️" },
   77: { description: "Snow grains",      emoji: "🌨️" },
-  80: { description: "Rain showers",     emoji: "🌦️" },
+  80: { description: "Rain showers",     emoji: "🌦️", night: "🌧️" },
   81: { description: "Rain showers",     emoji: "🌧️" },
   82: { description: "Violent showers",  emoji: "⛈️" },
   85: { description: "Snow showers",     emoji: "🌨️" },
@@ -63,6 +63,7 @@ export async function fetchForecast(lat, lon, city) {
   const data = await res.json();
 
   const c = data.current;
+  const isDay = c.is_day === 1;
   const current = {
     city,
     temp: c.temperature_2m,
@@ -70,7 +71,8 @@ export async function fetchForecast(lat, lon, city) {
     humidity: c.relative_humidity_2m,
     windSpeed: c.wind_speed_10m,
     pressure: Math.round(c.surface_pressure),
-    weather: describeWeather(c.weather_code, c.is_day === 1),
+    isDay,
+    weather: describeWeather(c.weather_code, isDay),
   };
 
   const d = data.daily;

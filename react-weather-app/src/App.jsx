@@ -50,15 +50,25 @@ function App() {
   }, []);
 
   const hasData = Boolean(currentWeather);
+  const isDay = currentWeather ? currentWeather.isDay : true;
 
   return (
-    <div className="App" style={{ background: getAQIGradient(aqi) }}>
+    <div
+      className={`App${isDay ? "" : " night"}`}
+      style={{ background: getAQIGradient(aqi, isDay) }}
+    >
       <header className="app-header">
         <div className="brand">
           <span className="brand-mark" aria-hidden="true">☁</span>
           <span className="brand-name">AeroPurity</span>
         </div>
-        <p className="brand-tagline">Live AQI &amp; weather, city by city</p>
+        {hasData ? (
+          <p className="brand-tagline daynight">
+            {isDay ? "☀️ Daytime" : "🌙 Nighttime"}
+          </p>
+        ) : (
+          <p className="brand-tagline">Live AQI &amp; weather, city by city</p>
+        )}
       </header>
 
       <main className="container">
