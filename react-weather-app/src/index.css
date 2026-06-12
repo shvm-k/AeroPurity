@@ -1,76 +1,12 @@
 /* index.css */
 body {
-    margin: 0;
-    font-family: "Roboto", Arial, sans-serif !important;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #d5d4d4;
-  }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-  
-  /* CSS styles for the logo */
-  #logo {
-    max-width: 150px;
-    height: auto;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 999;
-}
-    
-  
-    footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: #f0f0f0;
-        padding: 1px 5px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 999; /* Ensure footer is on top of other content */
-    }
-    
-    .left-section {
-      text-align: left;
-    }
-  
-    .right-section {
-      text-align: right;
-      margin-right: 10px; /* Add margin to the right */
-    }
-  
-
-    
-
-    
-
-
-/* Footer.module.css */
-
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #f0f0f0;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 999; /* Ensure footer is on top of other content */
+  margin: 0;
+  font-family: "Space Grotesk", system-ui, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #c8b6ff;
 }
 
-.left-section {
-  text-align: left;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-
-.right-section {
-  text-align: right;
-}
-

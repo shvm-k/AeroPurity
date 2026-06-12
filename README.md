@@ -1,30 +1,36 @@
 ## AEROPURITY
-AeroPurity provides interactive visualizations of air quality index (AQI) data and weather forecasts collected by the drones. Users can explore trends, patterns, and fluctuations in environmental conditions over time and across different locations.
+AeroPurity provides interactive visualizations of air quality index (AQI) data and weather forecasts. Users can search any Indian city for real-time AQI, temperature, humidity, wind data, and a multi-day forecast.
 
-### Getting Started with Create React App
-This project was bootstrapped with Create React App.
+### Built with Vite + React
+This project was built with Vite + React.
 
-### Available Scripts
-In the project directory, you can run:
+### Getting Started
+The app lives in `react-weather-app/`. From that directory:
 
-npm start
-Runs the app in the development mode.
-Open http://localhost:3000 to view it in your browser.
+```bash
+npm install
+npm run dev      # Runs the dev server at http://localhost:3000
+npm run build    # Builds the production bundle into dist/
+npm run preview  # Previews the production build locally
+```
 
-The page will reload when you make changes.
-You may also see any lint errors in the console.
+The page hot-reloads as you make changes.
 
-npm test
-Launches the test runner in the interactive watch mode.
-See the section about running tests for more information.
+### Environment variables
+Create a `.env` file in `react-weather-app/` (see `.env.example`):
 
-npm run build
-Builds the app for production to the build folder.
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+VITE_WEATHER_API_KEY=your_openweathermap_key
+VITE_AQI_API_TOKEN=your_waqi_token
+VITE_RAPIDAPI_KEY=your_geodb_rapidapi_key
+```
 
-The build is minified and the filenames include the hashes.
-Your app is ready to be deployed!
-
+`.env` is gitignored. On Netlify, add these same `VITE_*` keys under Site configuration → Environment variables.
 
 ### Deployment
-Hosted on netlify https://aeropurity.netlify.app
+Hosted on Netlify: https://aeropurity.netlify.app
+
+Build settings (also handled by `netlify.toml`):
+- Base directory: `react-weather-app`
+- Build command: `npm run build`
+- Publish directory: `react-weather-app/dist`

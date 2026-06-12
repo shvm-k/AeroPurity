@@ -1,109 +1,159 @@
-/* current-weather.css */
+/* current-weather.css — neo-brutalist */
 
-/* Add padding and margin to create a gap between containers */
 .weather-container {
-    margin: 20px;
-    padding: 20px;
-    background-color: transparent; /* Set background color to transparent */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .weather {
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    transition: all 0.3s ease;
-    background-color: #fff; /* Set background color for the weather container */
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+  background: var(--card);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
 .weather:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-lg);
 }
 
 .top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .weather-icon {
-    width: 80px;
-    height: 80px;
+  width: 84px;
+  height: 84px;
 }
 
 .city {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
+  font-family: "Archivo Black", sans-serif;
+  font-size: 26px;
+  letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .weather-description {
-    margin-top: 5px;
-    color: #666;
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: capitalize;
+  background: var(--pastel-mint);
+  border: var(--border);
+  border-radius: 999px;
+  padding: 3px 12px;
 }
 
 .bottom {
-    margin-top: 20px;
+  margin-top: 18px;
+  height: auto;
 }
 
 .temperature {
-    font-size: 48px;
-    font-weight: bold;
-    color: #333;
+  font-family: "Archivo Black", sans-serif;
+  font-size: 64px;
+  line-height: 1;
+  margin: 0 0 16px;
 }
 
 .details {
-    margin-top: 20px;
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 .parameter-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--pastel-sky);
+  border: var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
 }
 
 .parameter-label {
-    font-weight: bold;
-    color: #333;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .parameter-value {
-    font-weight: normal;
-    color: #666;
+  font-weight: 700;
+  font-size: 18px;
 }
 
-/* Remove background color */
+/* ===== AQI card ===== */
 .aqi-container {
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.172);
-    background-color: #fff; /* Set background color for the AQI container */
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+  background: var(--pastel-yellow);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-/* Hover effect for the AQI container */
 .aqi-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-lg);
 }
 
 .aqi-label {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 6px;
 }
 
 .aqi-value {
-    font-size: 24px;
-    color: #00aaff; /* Or any other color you prefer */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  font-family: "Archivo Black", sans-serif;
+  font-size: 56px;
+  line-height: 1;
 }
 
-/* Container for the graph */
+.aqi-category {
+  display: inline-block;
+  margin: 10px 0 0;
+  font-weight: 700;
+  font-size: 14px;
+  background: var(--card);
+  border: var(--border);
+  border-radius: 999px;
+  padding: 4px 14px;
+}
+
+/* ===== Bhopal ML graph ===== */
 .graph-container {
-    margin-top: 20px; /* Add margin top */
-    padding: 20px; /* Add padding */
-    border-radius: 10px; /* Add border radius */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.172); /* Add box shadow */
-    background-color: #fff; /* Set background color for the graph container */
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  background: var(--card);
+  font-weight: 600;
+}
+
+.graph-container img {
+  max-width: 100%;
+  height: auto;
+  border: var(--border);
+  border-radius: 10px;
+}
+
+@media (max-width: 480px) {
+  .details {
+    grid-template-columns: 1fr;
+  }
+  .temperature {
+    font-size: 52px;
+  }
 }
