@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Search from "./components/search/search";
 import CurrentWeather from "./components/current-weather/current-weather";
 import Forecast from "./components/forecast/forecast";
-import { WEATHER_API_URL, WEATHER_API_KEY, AQI_API_URL, AQI_API_TOKEN } from "./api";
+import { fetchForecast, fetchAirQuality } from "./api";
 import { getAQIGradient } from "./utils/aqiUtils";
 import "./App.css";
 
@@ -23,26 +23,11 @@ function App() {
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   const fetchWeatherData = (lat, lon, city) => {
-    const currentWeatherFetch = fetch(
-      `${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
-    );
-    const forecastFetch = fetch(
-      `${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
-    );
-    const aqiFetch = fetch(
-      `${AQI_API_URL}/?lat=${lat}&lon=${lon}&token=${AQI_API_TOKEN}`
-    );
-
-    Promise.all([currentWeatherFetch, forecastFetch, aqiFetch])
-      .then(async (response) => {
-        const weatherResponse = await response[0].json();
-        const forcastResponse = await response[1].json();
-        const aqiResponse = await response[2].json();
-
-        const cityLabel = city || `${weatherResponse.name}, ${weatherResponse.sys?.country}`;
-        setCurrentWeather({ city: cityLabel, ...weatherResponse });
-        setForecast({ city: cityLabel, ...forcastResponse });
-        setAqi(aqiResponse.data.aqi); // Adjust this according to your API response structure
+    Promise.all([fetchForecast(lat, lon, city), fetchAirQuality(lat, lon)])
+      .then(([weather, aqiValue]) => {
+        setCurrentWeather(weather.current);
+        setForecast(weather.forecast);
+        setAqi(aqiValue);
       })
       .catch(console.log);
   };
@@ -55,7 +40,7 @@ function App() {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        ({ coords }) => fetchWeatherData(coords.latitude, coords.longitude),
+        ({ coords }) => fetchWeatherData(coords.latitude, coords.longitude, "Your location"),
         () => setShowSuggestions(true)
       );
     } else {
@@ -65,15 +50,25 @@ function App() {
   }, []);
 
   const hasData = Boolean(currentWeather);
+  const isDay = currentWeather ? currentWeather.isDay : true;
 
   return (
-    <div className="App" style={{ background: getAQIGradient(aqi) }}>
+    <div
+      className={`App${isDay ? "" : " night"}`}
+      style={{ background: getAQIGradient(aqi, isDay) }}
+    >
       <header className="app-header">
         <div className="brand">
           <span className="brand-mark" aria-hidden="true">☁</span>
           <span className="brand-name">AeroPurity</span>
         </div>
-        <p className="brand-tagline">Live AQI &amp; weather, city by city</p>
+        {hasData ? (
+          <p className="brand-tagline daynight">
+            {isDay ? "☀️ Daytime" : "🌙 Nighttime"}
+          </p>
+        ) : (
+          <p className="brand-tagline">Live AQI &amp; weather, city by city</p>
+        )}
       </header>
 
       <main className="container">
@@ -83,7 +78,7 @@ function App() {
           <section className="hero">
             <h1 className="hero-title">Breathe the data.</h1>
             <p className="hero-sub">
-              Search any Indian city for real-time air quality, temperature, and a
+              Search any city worldwide for real-time air quality, temperature, and a
               multi-day forecast.
             </p>
             {showSuggestions && (
@@ -111,7 +106,7 @@ function App() {
               <CurrentWeather data={currentWeather} aqi={aqi} />
             </div>
             <div className="dashboard-col">
-              {forecast && <Forecast data={forecast} />}
+              {forecast && <Forecast days={forecast} />}
             </div>
           </div>
         )}

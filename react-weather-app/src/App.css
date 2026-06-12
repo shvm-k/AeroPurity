@@ -29,6 +29,18 @@
   padding-bottom: 90px;
 }
 
+/* Nighttime: dark background, so soften the hard black shadows into
+   translucent ones that still pop the cream cards off a dark gradient. */
+.App.night {
+  --shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+  --shadow-sm: 4px 4px 0 rgba(0, 0, 0, 0.5);
+  --shadow-lg: 9px 9px 0 rgba(0, 0, 0, 0.5);
+}
+
+.brand-tagline.daynight {
+  background: var(--pastel-sky);
+}
+
 /* ===== Header ===== */
 .app-header {
   display: flex;

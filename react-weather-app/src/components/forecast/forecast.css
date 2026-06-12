@@ -33,8 +33,10 @@
 }
 
 .icon-small {
-  width: 42px;
-  height: 42px;
+  font-size: 30px;
+  line-height: 1;
+  width: 38px;
+  text-align: center;
 }
 
 .day {

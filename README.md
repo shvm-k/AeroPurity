@@ -16,16 +16,14 @@ npm run preview  # Previews the production build locally
 
 The page hot-reloads as you make changes.
 
-### Environment variables
-Create a `.env` file in `react-weather-app/` (see `.env.example`):
+### Data sources
+AeroPurity runs entirely on the free, **keyless** [Open-Meteo](https://open-meteo.com/) APIs — no API keys or `.env` configuration required:
 
-```
-VITE_WEATHER_API_KEY=your_openweathermap_key
-VITE_AQI_API_TOKEN=your_waqi_token
-VITE_RAPIDAPI_KEY=your_geodb_rapidapi_key
-```
+- **Weather + 7-day forecast** — Open-Meteo Forecast API
+- **Air quality (US AQI)** — Open-Meteo Air-Quality API
+- **City search** — Open-Meteo Geocoding API
 
-`.env` is gitignored. On Netlify, add these same `VITE_*` keys under Site configuration → Environment variables.
+WMO weather codes are mapped to emoji icons in `src/api.js`.
 
 ### Deployment
 Hosted on Netlify: https://aeropurity.netlify.app
