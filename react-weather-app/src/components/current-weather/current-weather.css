@@ -39,9 +39,35 @@
   margin: 0;
 }
 
+.local-time {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 10px 0 0;
+  background: var(--pastel-lav);
+  border: var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  padding: 4px 12px;
+}
+
+.local-clock {
+  font-family: "Archivo Black", sans-serif;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.local-date {
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .weather-description {
   display: inline-block;
-  margin-top: 8px;
+  margin-top: 10px;
   font-weight: 700;
   font-size: 14px;
   text-transform: capitalize;

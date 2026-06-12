@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./current-weather.css";
 import { getAQIInfo } from "../../utils/aqiUtils";
 
+function useLocalTime(timeZone) {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const opts = timeZone ? { timeZone } : {};
+  try {
+    const time = new Intl.DateTimeFormat("en-US", {
+      ...opts,
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(now);
+    const date = new Intl.DateTimeFormat("en-US", {
+      ...opts,
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+    }).format(now);
+    return { time, date };
+  } catch {
+    return { time: "", date: "" };
+  }
+}
+
 const CurrentWeather = ({ data, aqi }) => {
   const { label: aqiLabel, color: aqiColor } = getAQIInfo(aqi);
+  const { time, date } = useLocalTime(data.timezone);
 
   return (
     <div className="weather-container">
@@ -11,6 +38,12 @@ const CurrentWeather = ({ data, aqi }) => {
         <div className="top">
           <div>
             <p className="city">{data.city}</p>
+            {time && (
+              <p className="local-time">
+                <span className="local-clock">{time}</span>
+                <span className="local-date">{date}</span>
+              </p>
+            )}
             <p className="weather-description">{data.weather.description}</p>
           </div>
           <span className="weather-icon" role="img" aria-label={data.weather.description}>

@@ -72,6 +72,7 @@ export async function fetchForecast(lat, lon, city) {
     windSpeed: c.wind_speed_10m,
     pressure: Math.round(c.surface_pressure),
     isDay,
+    timezone: data.timezone,
     weather: describeWeather(c.weather_code, isDay),
   };
 
