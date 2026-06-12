@@ -47,24 +47,41 @@ body {
   padding-bottom: 96px;
 }
 
-/* Night sky: a moon + scattered stars behind the cards. */
-.App.night::before {
+/* ===== Ambient weather scenes (painted behind the cards) =====
+   ::before = sky layer (sun / moon+stars / clouds)
+   ::after  = ground / precipitation layer (green field / rain / snow) */
+.App[class*="scene-"]::before,
+.App[class*="scene-"]::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* --- Clear day: sun + glow, with a green field rolling up from the bottom --- */
+.App.scene-clear:not(.night)::before {
   background-image:
-    /* moon glow + disc, top-right */
+    radial-gradient(circle at 85% 13%, rgba(255, 214, 90, 0.45) 0%, rgba(255, 214, 90, 0) 24%),
+    radial-gradient(circle at 85% 13%, #ffd23f 0 18px, rgba(255, 210, 63, 0) 19px);
+}
+.App.scene-clear:not(.night)::after {
+  background-image:
+    radial-gradient(130% 60% at 22% 116%, #8fd36a 0%, rgba(143, 211, 106, 0) 62%),
+    radial-gradient(140% 64% at 80% 120%, #5bb347 0%, rgba(91, 179, 71, 0) 62%);
+}
+
+/* --- Clear night: moon + scattered, twinkling stars --- */
+.App.night.scene-clear::before {
+  background-image:
     radial-gradient(circle at 87% 12%, rgba(255, 247, 214, 0.16) 0%, transparent 26%),
     radial-gradient(circle at 87% 12%, #fdf3c7 0 7px, rgba(253, 243, 199, 0) 8px),
-    /* bright stars */
     radial-gradient(2.4px 2.4px at 18% 16%, #ffffff, transparent),
     radial-gradient(2.2px 2.2px at 64% 9%, #ffffff, transparent),
     radial-gradient(2.6px 2.6px at 41% 30%, #eaf2ff, transparent),
     radial-gradient(2.2px 2.2px at 78% 40%, #ffffff, transparent),
-    /* small stars */
     radial-gradient(1.4px 1.4px at 9% 34%, #cfe0ff, transparent),
     radial-gradient(1.3px 1.3px at 28% 52%, #ffffff, transparent),
     radial-gradient(1.4px 1.4px at 52% 18%, #ffffff, transparent),
@@ -79,13 +96,95 @@ body {
     radial-gradient(1.3px 1.3px at 68% 90%, #ffffff, transparent),
     radial-gradient(1.2px 1.2px at 95% 84%, #cfe0ff, transparent),
     radial-gradient(1.3px 1.3px at 6% 80%, #ffffff, transparent);
-  background-size: cover;
   animation: twinkle 4.5s ease-in-out infinite alternate;
+}
+
+/* --- Clouds (also used as the sky for rain/snow) --- */
+.App.scene-clouds::before,
+.App.scene-rain::before,
+.App.scene-snow::before {
+  background-image:
+    radial-gradient(46% 30% at 22% 15%, rgba(255, 255, 255, 0.95), transparent 62%),
+    radial-gradient(40% 26% at 33% 21%, rgba(255, 255, 255, 0.9), transparent 62%),
+    radial-gradient(50% 30% at 71% 12%, rgba(255, 255, 255, 0.92), transparent 62%),
+    radial-gradient(38% 24% at 84% 19%, rgba(255, 255, 255, 0.88), transparent 62%);
+  animation: drift 50s ease-in-out infinite alternate;
+}
+/* Greyer, dimmer clouds at night */
+.App.scene-clouds.night::before,
+.App.scene-rain.night::before,
+.App.scene-snow.night::before {
+  background-image:
+    radial-gradient(46% 30% at 22% 15%, rgba(150, 162, 176, 0.5), transparent 62%),
+    radial-gradient(40% 26% at 33% 21%, rgba(150, 162, 176, 0.42), transparent 62%),
+    radial-gradient(50% 30% at 71% 12%, rgba(150, 162, 176, 0.48), transparent 62%),
+    radial-gradient(38% 24% at 84% 19%, rgba(150, 162, 176, 0.4), transparent 62%);
+}
+/* Overcast grey veil on the background for cloudy days */
+.App.scene-clouds:not(.night)::after {
+  background-image: linear-gradient(rgba(141, 152, 165, 0.16), rgba(141, 152, 165, 0.16));
+}
+
+/* --- Rain: falling droplets --- */
+.App.scene-rain::after {
+  background-image:
+    radial-gradient(1.6px 11px at 15% 0%, rgba(96, 140, 196, 0.75), transparent),
+    radial-gradient(1.6px 9px at 35% 0%, rgba(96, 140, 196, 0.6), transparent),
+    radial-gradient(1.6px 12px at 55% 0%, rgba(96, 140, 196, 0.75), transparent),
+    radial-gradient(1.6px 9px at 75% 0%, rgba(96, 140, 196, 0.65), transparent),
+    radial-gradient(1.6px 11px at 90% 0%, rgba(96, 140, 196, 0.7), transparent);
+  background-size: 90px 120px;
+  background-repeat: repeat;
+  animation: rainfall 0.6s linear infinite;
+}
+/* Overcast veil so rain reads on a light daytime background */
+.App.scene-rain:not(.night) {
+  /* slightly cooler/greyer base is handled via the cloud layer below */
+}
+.App.scene-rain:not(.night)::before {
+  background-image:
+    linear-gradient(rgba(150, 162, 176, 0.22), rgba(150, 162, 176, 0.22)),
+    radial-gradient(46% 30% at 22% 15%, rgba(214, 220, 228, 0.95), transparent 62%),
+    radial-gradient(40% 26% at 33% 21%, rgba(214, 220, 228, 0.9), transparent 62%),
+    radial-gradient(50% 30% at 71% 12%, rgba(214, 220, 228, 0.92), transparent 62%),
+    radial-gradient(38% 24% at 84% 19%, rgba(214, 220, 228, 0.88), transparent 62%);
+}
+
+/* --- Snow: drifting flakes --- */
+.App.scene-snow::after {
+  background-image:
+    radial-gradient(2.4px 2.4px at 20% 0%, #ffffff, transparent),
+    radial-gradient(2px 2px at 50% 0%, #ffffff, transparent),
+    radial-gradient(2.4px 2.4px at 80% 0%, #eef3ff, transparent),
+    radial-gradient(2px 2px at 35% 0%, #ffffff, transparent),
+    radial-gradient(2px 2px at 65% 0%, #ffffff, transparent);
+  background-size: 120px 150px;
+  background-repeat: repeat;
+  animation: snowfall 7s linear infinite;
 }
 
 @keyframes twinkle {
   from { opacity: 0.75; }
   to { opacity: 1; }
+}
+@keyframes drift {
+  from { transform: translateX(-2.5%); }
+  to { transform: translateX(2.5%); }
+}
+@keyframes rainfall {
+  from { background-position: 0 0; }
+  to { background-position: -12px 120px; }
+}
+@keyframes snowfall {
+  from { background-position: 0 0; }
+  to { background-position: 16px 150px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .App[class*="scene-"]::before,
+  .App[class*="scene-"]::after {
+    animation: none !important;
+  }
 }
 
 .app-header,

@@ -7,6 +7,16 @@ import { fetchForecast, fetchAirQuality } from "./api";
 import { getAQIBackground } from "./utils/aqiUtils";
 import "./App.css";
 
+// Map a WMO weather code to an ambient background scene.
+function sceneFor(code) {
+  if (code == null) return "clear";
+  if ([0, 1].includes(code)) return "clear";
+  if ([2, 3, 45, 48].includes(code)) return "clouds";
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return "snow";
+  if (code >= 51) return "rain"; // drizzle, rain, showers, thunderstorm
+  return "clear";
+}
+
 const SUGGESTED_CITIES = [
   { name: 'Delhi', lat: 28.7041, lon: 77.1025 },
   { name: 'Mumbai', lat: 19.0760, lon: 72.8777 },
@@ -51,6 +61,7 @@ function App() {
 
   const hasData = Boolean(currentWeather);
   const isDay = currentWeather ? currentWeather.isDay : true;
+  const scene = hasData ? sceneFor(currentWeather.weather.code) : "clear";
 
   // Keep the page/body background in sync with the theme so the scrollbar
   // gutter and mobile overscroll never reveal a light strip at night.
@@ -60,7 +71,7 @@ function App() {
 
   return (
     <div
-      className={`App${isDay ? "" : " night"}`}
+      className={`App${isDay ? "" : " night"}${hasData ? ` scene-${scene}` : ""}`}
       style={{ background: getAQIBackground(aqi, isDay) }}
     >
       <header className="app-header">
