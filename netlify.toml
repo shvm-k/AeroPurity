@@ -1,0 +1,11 @@
+# Repo-root Netlify config — authoritative regardless of dashboard settings.
+# The app lives in the react-weather-app/ subfolder (Vite project).
+[build]
+  base = "react-weather-app"
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
