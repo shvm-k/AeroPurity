@@ -28,8 +28,8 @@
 }
 
 .weather-icon {
-  width: 84px;
-  height: 84px;
+  font-size: 64px;
+  line-height: 1;
 }
 
 .city {
